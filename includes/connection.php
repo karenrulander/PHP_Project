@@ -1,9 +1,9 @@
 <?php
 // to connect to a MySQL Database
+// Database Name: terry (on locahost using MAMP and PHPMyAdmin)
+
 // use a try/catch block to catch any errors that might occur.
 
-// Keep This Code....
-// To be used in Terry's project
 try {
   $db = new PDO("mysql:host=localhost;dbname=terry;port=3306","root","root");
   $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);

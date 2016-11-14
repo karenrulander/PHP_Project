@@ -3,8 +3,13 @@ include("includes/PlayerDataHandler.php");
 include("includes/Player.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+  // if a POST request had been submitted, determine which one: ADD, UPDATE, or DELETE
+  // current, ADD is the only one available
+  // stay tuned for better things to come.
     if ($_POST["UPDATE_TYPE"] == "ADD") {
+      // code for adding a new player to the roster.
+      // Later, ALL the fields from the database, will be included here and on
+      // the 'Add a Player' form. Stay tuned for better things to come.
         $inputPerson = array();
         $inputPerson["firstName"] = trim(filter_input(INPUT_POST,"firstName",FILTER_SANITIZE_STRING));
         $inputPerson["lastName"] = trim(filter_input(INPUT_POST,"lastName",FILTER_SANITIZE_STRING));
@@ -24,13 +29,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          echo "<h1>   " . $newPlayer->getJerseyNumber() . "- Jersey Number. </h1>";
 
     } elseif ($_POST["UPDATE_TYPE"] == "UPDATE") {
+      // code for updating (editing) a player's information in the roster..
+      // this code is not complete. Stay tuned for better things to come.
+
          $inputPerson["jerseynumber"] = trim(filter_input(INPUT_POST,"jerseynumber",FILTER_SANITIZE_NUMBER_INT));
          $updateInPlayer = new Player($inputPerson);
          $playerHandler = new PlayerDataHandler($updateInPlayer);
          $success = $playerHandler->update_player();
 
     } elseif ($_POST["UPDATE_TYPE"] == "DELETE") {
-      # code...
+      // future code for deleting a player from the roster.
     }
 } else {
 

@@ -1,6 +1,11 @@
 <?php
 require_once("credentials.php");
-//include("includes/Player.php");
+// The class 'PlayerDataHandler' has all of the functions neeeded to
+// list the players from the roster on the website along with adding
+// new players.
+// Eventually, the functions for updating a player's information and
+// deleting a player from the roster will be added.
+
 
 class PlayerDataHandler
 {

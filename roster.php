@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
     <div >
       <h3>Team Roster</h3>
-      <a class="btn btn-success btn-lg hidden-xs" data-toggle="modal" href="#playerModal">+ Add A Player</a>
+      <a class="btn btn-success btn-lg " data-toggle="modal" href="#playerModal">+ Add A Player</a>
       </div>
 
 			<?php

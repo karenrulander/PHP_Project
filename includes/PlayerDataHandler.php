@@ -35,7 +35,7 @@ class PlayerDataHandler
 			public function get_players() {
 				$sql = "
 					SELECT jerseynumber, firstName, lastName, address
-					FROM `roster`
+					FROM `roster` ORDER BY jerseynumber
 				";
 			  $stmt = $this->db->query($sql);
 			  $results = $stmt->fetchAll();

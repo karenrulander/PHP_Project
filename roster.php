@@ -1,8 +1,41 @@
 <?php
-	// Setup database
+include("includes/PlayerDataHandler.php");
+include("includes/Player.php");
 
-	require_once(__DIR__."/includes/functions.php");
-	$db = get_db();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if ($_POST["UPDATE_TYPE"] == "ADD") {
+        $inputPerson = array();
+        $inputPerson["firstName"] = trim(filter_input(INPUT_POST,"firstName",FILTER_SANITIZE_STRING));
+        $inputPerson["lastName"] = trim(filter_input(INPUT_POST,"lastName",FILTER_SANITIZE_STRING));
+        $inputPerson["address"] = trim(filter_input(INPUT_POST,"address",FILTER_SANITIZE_STRING));
+        $inputPerson["city"] = trim(filter_input(INPUT_POST,"city",FILTER_SANITIZE_STRING));
+        $inputPerson["state"] = trim(filter_input(INPUT_POST,"state",FILTER_SANITIZE_STRING));
+        $inputPerson["zipcode"] = trim(filter_input(INPUT_POST,"zipcode",FILTER_SANITIZE_STRING));
+        $inputPerson["jerseynumber"] = trim(filter_input(INPUT_POST,"jerseynumber",FILTER_SANITIZE_NUMBER_INT));
+        $inputPerson["UniformSize"] = trim(filter_input(INPUT_POST,"UniformSize",FILTER_SANITIZE_STRING));
+
+        $newPlayer = new Player($inputPerson);
+        $playerHandler = new PlayerDataHandler($newPlayer);
+        $success = $playerHandler->add_player();
+        //Message to user.
+         echo " <div>";
+         //echo "<h1>  $firstName Has Been Added. </h1>";
+         echo "<h1>   " . $newPlayer->getJerseyNumber() . "- Jersey Number. </h1>";
+
+    } elseif ($_POST["UPDATE_TYPE"] == "UPDATE") {
+         $inputPerson["jerseynumber"] = trim(filter_input(INPUT_POST,"jerseynumber",FILTER_SANITIZE_NUMBER_INT));
+         $updateInPlayer = new Player($inputPerson);
+         $playerHandler = new PlayerDataHandler($updateInPlayer);
+         $success = $playerHandler->update_player();
+
+    } elseif ($_POST["UPDATE_TYPE"] == "DELETE") {
+      # code...
+    }
+} else {
+
+    $playerHandler = new PlayerDataHandler();
+}
 
 ?>
 <!DOCTYPE html>
@@ -37,15 +70,21 @@
       <a class="btn btn-success btn-lg hidden-xs" data-toggle="modal" href="#playerModal">+ Add A Player</a>
       </div>
 
-			<?php echo get_players($db); ?>
+			<?php
+      echo $playerHandler->get_players(); ?>
 
-      <ul class="rosterList">
+      <div class="modal fade" id="playerModal">
+      <!-- <ul class="rosterList">
 				<li>Original HTML Code</p>
         <li>Isaac Ferg 413 Rowland Ave  Modesto, CA 95354</p>
         <li>Theo Ferg  413 Rowland Ave  Modesto, CA 95354</p>
-      </ul>
+      </ul> -->
     <!-- Modal -->
-    <div class="modal fade" id="playerModal">
+    <!-- This is the pop up window for Adding a new player.
+         This allows user to enter all the relative information
+         for the new player.
+       -->
+
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -53,39 +92,43 @@
             <h3 class="modal-title">Enter The Player's Information</h3>
           </div>
           <div class="modal-body">
-            <form class="">
+            <form class="" method="post" action="roster.php">
               <div class="form-group">
+                <INPUT style="display:none" value="ADD" type="text" id="UPDATE_TYPE" name="UPDATE_TYPE">
   							<label for="firstName">First Name</label>
-								<INPUT type="text" class="form-control" id="firstName" placeholder="Enter First Name">
+								<INPUT type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name">
 								<label for="lastName">Last Name</label>
 
-								<INPUT type="text" class="form-control" id="lastName" placeholder="Enter Last Name">
+								<INPUT type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name">
                 <label for="playerAddress">Address</label>
-                <input type="text" class="form-control" id="playerAddress" placeholder="Address">
+                <input type="text" class="form-control" id="address" name="address" placeholder="Address">
                 <label for="playerCity">City</label>
-                <input type="text" class="form-control" id="playerCity" placeholder="Modesto">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Modesto">
                 <div class="form-inline" id=formline2>
                   <label for="playerState">State</label>
-                  <input type="text" class="form-control" id="playerState" placeholder="CA">
+                  <input type="text" class="form-control"  id="state" name="state" placeholder="CA">
                   <label for="playerZip">Zip</label>
-                  <input type="number" class="form-control" id="playerZip" placeholder="ZipCode">
+                  <input type="number" class="form-control" id="zipcode" name="zipcode" placeholder="ZipCode">
                 </div> <!-- formline#2 -->
               </div>
 
               <div class="form-inline" id="formline3">
                 <label for="playerNumber">Number</label>
-                <input type="text" id="playerNumber" placeholder="Jersey Number">
+                <input type="text" id="playerNumber" name="jerseynumber" placeholder="jerseynumber">
                 <div class="form-group">
                   <label for="size">Uniform Size</label>
-                  <select class="form-control" id="size">
+                  <select class="form-control" id="UniformSize" name="UniformSize">
                     <option>Small</option>
                     <option>Medium</option>
                     <option>Large</option>
                     <option>X-Large</option>
                   </select>
+
                 </div> <!-- uniform size -->
               </div>  <!-- form line#3 -->
-              <button type="submit" class="btn btn-primary" data-dismiss="modal">Add player</button>
+  <!--            <button type="submit" class="btn btn-primary">Add player</button> -->
+              <input type="submit" class="btn btn-primary" value ="Add Player"/>
+
             </form>
           </div> <!-- End modal-body -->
 

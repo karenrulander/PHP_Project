@@ -27,3 +27,11 @@ Calendar Page: showing important dates.
 Database:
 localhost via MAMP and phpMyAdmin
 database name: terry
+
+
+Setup Instructions:
+
+1. Add a database - Name it 'terry'.
+2. Upload/Import the terry.sql file to phpMyAdmin (localhost)
+3. The credentials for the PDO connect, can be found in includes/credentials.php file. Modify the credentials as needed.
+4. You may need to change the credentials in the includes/connetion.php file. Currently, on line 8, the user and password is set to 'root'. Modify this if needed.

@@ -24,9 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $playerHandler = new PlayerDataHandler($newPlayer);
         $success = $playerHandler->add_player();
         //Message to user.
-         echo " <div>";
+//         echo " <div>";
          //echo "<h1>  $firstName Has Been Added. </h1>";
-         echo "<h1>   " . $newPlayer->getJerseyNumber() . "- Jersey Number. </h1>";
+//         echo "<h1>   " . $newPlayer->getJerseyNumber() . "- Jersey Number. </h1>";
 
     } elseif ($_POST["UPDATE_TYPE"] == "UPDATE") {
       // code for updating (editing) a player's information in the roster..
@@ -80,6 +80,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			<?php
       echo $playerHandler->get_players(); ?>
+       <!-- <ul class="rosterList">
+				<li>Original HTML Code</p>
+        <li>Isaac Ferg 413 Rowland Ave  Modesto, CA 95354
+      <a class="btn btn-primary btn-xs " data-toggle="modal" href="#playerEditModal">Edit Player</a>
+      <a class="btn btn-danger btn-xs " data-toggle="modal" href="#playerEditModal">Delete Player</a>
+        </p>
+        <li>Theo Ferg  413 Rowland Ave  Modesto, CA 95354</p>
+      </ul> -->
 
       <div class="modal fade" id="playerModal">
       <!-- <ul class="rosterList">

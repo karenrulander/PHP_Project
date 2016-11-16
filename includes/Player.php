@@ -3,14 +3,14 @@ class Player
 {
 
   // Player class - all information being tracked for a player on the soccer team
-    private $jerseynumber;
-    private $firstName;
-    private $lastName;
-    private $address;
-    private $city;
-    private $state;
-    private $zipcode;
-    private $UniformSize;
+    public $jerseynumber;
+    public $firstName;
+    public $lastName;
+    public $address;
+    public $city;
+    public $state;
+    public $zipcode;
+    public $UniformSize;
 
     public function __construct(array $newPerson){
         $this->setJerseyNumber($newPerson["jerseynumber"]);
@@ -81,8 +81,6 @@ class Player
     public function getUniformSize(){
         return $this->UniformSize;
     }
-
-
 
 }
 ?>

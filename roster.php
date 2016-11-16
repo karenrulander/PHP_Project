@@ -2,14 +2,10 @@
 include("includes/PlayerDataHandler.php");
 include("includes/Player.php");
 
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // if a POST request had been submitted, determine which one: ADD, UPDATE, or DELETE
-  // current, ADD is the only one available
-  // stay tuned for better things to come.
-    if ($_POST["UPDATE_TYPE"] == "ADD") {
-      // code for adding a new player to the roster.
-      // Later, ALL the fields from the database, will be included here and on
-      // the 'Add a Player' form. Stay tuned for better things to come.
+  // if a POST request had been submitted, it is an "ADD"
+
         $inputPerson = array();
         $inputPerson["firstName"] = trim(filter_input(INPUT_POST,"firstName",FILTER_SANITIZE_STRING));
         $inputPerson["lastName"] = trim(filter_input(INPUT_POST,"lastName",FILTER_SANITIZE_STRING));
@@ -20,28 +16,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $inputPerson["jerseynumber"] = trim(filter_input(INPUT_POST,"jerseynumber",FILTER_SANITIZE_NUMBER_INT));
         $inputPerson["UniformSize"] = trim(filter_input(INPUT_POST,"UniformSize",FILTER_SANITIZE_STRING));
 
-        $newPlayer = new Player($inputPerson);
-        $playerHandler = new PlayerDataHandler($newPlayer);
-        $success = $playerHandler->add_player();
-        //Message to user.
-//         echo " <div>";
-         //echo "<h1>  $firstName Has Been Added. </h1>";
-//         echo "<h1>   " . $newPlayer->getJerseyNumber() . "- Jersey Number. </h1>";
+    // If jerseynumber has NOT been entered,
+    //   then do NOT add player..
+        if (!isset($inputPerson["jerseynumber"] ) ) {
+          // jerseynumber has been entered... add player to roster.
+          $newPlayer = new Player($inputPerson);
+          $playerHandler = new PlayerDataHandler($newPlayer);
+          $success = $playerHandler->add_player();
+        } else {
+        // Jerseynumber is blank... do not add!
+        // need to create playerdatahandler for roster to be displayed.
+            $playerHandler = new PlayerDataHandler();
+        }
 
-    } elseif ($_POST["UPDATE_TYPE"] == "UPDATE") {
-      // code for updating (editing) a player's information in the roster..
-      // this code is not complete. Stay tuned for better things to come.
-
-         $inputPerson["jerseynumber"] = trim(filter_input(INPUT_POST,"jerseynumber",FILTER_SANITIZE_NUMBER_INT));
-         $updateInPlayer = new Player($inputPerson);
-         $playerHandler = new PlayerDataHandler($updateInPlayer);
-         $success = $playerHandler->update_player();
-
-    } elseif ($_POST["UPDATE_TYPE"] == "DELETE") {
-      // future code for deleting a player from the roster.
-    }
 } else {
-
+  // need to create playerdatahandler for roster to be displayed.
     $playerHandler = new PlayerDataHandler();
 }
 
@@ -83,23 +72,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        <!-- <ul class="rosterList">
 				<li>Original HTML Code</p>
         <li>Isaac Ferg 413 Rowland Ave  Modesto, CA 95354
-      <a class="btn btn-primary btn-xs " data-toggle="modal" href="#playerEditModal">Edit Player</a>
-      <a class="btn btn-danger btn-xs " data-toggle="modal" href="#playerEditModal">Delete Player</a>
+      <a class="btn btn-primary btn-xs " data-toggle="modal" href="#playerModalUpdate">Edit Player</a>
+      <a class="btn btn-danger btn-xs " data-toggle="modal" href="#playerModalDelete">Delete Player</a>
         </p>
         <li>Theo Ferg  413 Rowland Ave  Modesto, CA 95354</p>
       </ul> -->
 
       <div class="modal fade" id="playerModal">
-      <!-- <ul class="rosterList">
-				<li>Original HTML Code</p>
-        <li>Isaac Ferg 413 Rowland Ave  Modesto, CA 95354</p>
-        <li>Theo Ferg  413 Rowland Ave  Modesto, CA 95354</p>
-      </ul> -->
     <!-- Modal -->
     <!-- This is the pop up window for Adding a new player.
          This allows user to enter all the relative information
          for the new player.
        -->
+
 
       <div class="modal-dialog">
         <div class="modal-content">
@@ -110,29 +95,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="modal-body">
             <form class="" method="post" action="roster.php">
               <div class="form-group">
-                <INPUT style="display:none" value="ADD" type="text" id="UPDATE_TYPE" name="UPDATE_TYPE">
-  							<label for="firstName">First Name</label>
-								<INPUT type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name">
-								<label for="lastName">Last Name</label>
 
-								<INPUT type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name">
-                <label for="playerAddress">Address</label>
+  							<label for="firstName">First Name</label>
+								<input type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter First Name">
+								<label for="lastName">Last Name</label>
+								<input type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter Last Name">
+                <label for="address">Address</label>
                 <input type="text" class="form-control" id="address" name="address" placeholder="Address">
-                <label for="playerCity">City</label>
+                <label for="city">City</label>
                 <input type="text" class="form-control" id="city" name="city" placeholder="Modesto">
                 <div class="form-inline" id=formline2>
-                  <label for="playerState">State</label>
+                  <label for="state">State</label>
                   <input type="text" class="form-control"  id="state" name="state" placeholder="CA">
-                  <label for="playerZip">Zip</label>
+                  <label for="zipcode">Zip</label>
                   <input type="number" class="form-control" id="zipcode" name="zipcode" placeholder="ZipCode">
                 </div> <!-- formline#2 -->
               </div>
 
               <div class="form-inline" id="formline3">
-                <label for="playerNumber">Number</label>
-                <input type="text" id="playerNumber" name="jerseynumber" placeholder="jerseynumber">
+                <label for="jerseynumber">Number</label>
+                <input type="text" id="jerseynumber" name="jerseynumber" placeholder="jerseynumber">
                 <div class="form-group">
-                  <label for="size">Uniform Size</label>
+                  <label for="UniformSize">Uniform Size</label>
                   <select class="form-control" id="UniformSize" name="UniformSize">
                     <option>Small</option>
                     <option>Medium</option>

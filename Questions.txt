@@ -1,0 +1,27 @@
+Questions:
+
+================
+ROSTER.php file:
+================
+
+** Question #1:
+  Why is the form-inline#2 (state and zipcode) butted up against the city field? How to fix it?
+
+===============
+UPDATE.php file:
+===============
+
+** Question #1:
+ Why does the zip code data NOT show on the update form?
+ It is always blank even though there is information in the database.
+ It is being updated... (if user does NOT enter the correct zip code, the zipcode will be set to blank!)
+
+** Question #2:
+ Why does the UniformSize NOT update, even though it does show the information on the form?
+
+** Question #3:
+  Currently, clicking on the 'x' does nothing...
+  How do I get it to close the modal, without saving the changes, and return to roster.php ?
+
+** Question #4:
+  Why is the form-inline#2 (state and zipcode) butted up against the city field? How to fix it?

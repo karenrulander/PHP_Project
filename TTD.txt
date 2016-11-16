@@ -1,0 +1,31 @@
+Things To Do When Time Allows:
+
+Roster Page:
+===========
+1) Change listing of players from an ul to a table. Also list more information from the database.
+
+2) Modify the 'Add A Player' button to show new fields added as a result of #1 above.
+
+3) Modify the 'Edit Player' button to show new fields added as a result of #1 above.
+
+
+
+
+Location Page:
+==============
+1) Add back and fix issue with the google api not displaying. (this has something to do with the localhost.) This was working before I moved it to MAMP.
+Refer to the Terry repositories on github. This was my front-end class project.
+
+
+
+Calendar Page:
+==============
+1) Change from HTML listing to the event table in the database. Provide add, edit, and delete functionality. (mimic the team roster logic.)
+
+
+
+Database:
+========
+
+roster table:  Add a new field called 'id'. Make this the primary key instead of the jerseynumber.
+              Change all relevant code.

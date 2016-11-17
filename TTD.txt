@@ -9,6 +9,9 @@ Roster Page:
 3) Modify the 'Edit Player' button to show new fields added as a result of #1 above.
 
 
+Update.PHP:
+===========
+Figure out how to close the modal when user clicks on the 'x'. This works on the 'Add a player' form, but not on the 'Update the Player's Information' form.
 
 
 Location Page:

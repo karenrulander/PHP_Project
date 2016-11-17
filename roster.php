@@ -16,10 +16,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $inputPerson["jerseynumber"] = trim(filter_input(INPUT_POST,"jerseynumber",FILTER_SANITIZE_NUMBER_INT));
         $inputPerson["UniformSize"] = trim(filter_input(INPUT_POST,"UniformSize",FILTER_SANITIZE_STRING));
 
-    // If jerseynumber has NOT been entered,
-    //   then do NOT add player..
-        if (!isset($inputPerson["jerseynumber"] ) ) {
+
+// echo "Jersey Number to be added: ";
+// echo $inputPerson["jerseynumber"]. "  ";;
+// echo "Is Jersey Number set? ";
+// echo isset($inputPerson["jerseynumber"]). "  ";
+//
+// echo "Is Jersey Number empty? ";
+// echo empty($inputPerson["jerseynumber"]). "  ";
+// echo "Is Jersey Number is null? ";
+// echo is_null($inputPerson["jerseynumber"]) . "  ";
+
+      // If jerseynumber has NOT been entered,
+      //   then do NOT add player..
+        if (!empty($inputPerson["jerseynumber"] ) ) {
           // jerseynumber has been entered... add player to roster.
+
           $newPlayer = new Player($inputPerson);
           $playerHandler = new PlayerDataHandler($newPlayer);
           $success = $playerHandler->add_player();
@@ -108,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   <label for="state">State</label>
                   <input type="text" class="form-control"  id="state" name="state" placeholder="CA">
                   <label for="zipcode">Zip</label>
-                  <input type="number" class="form-control" id="zipcode" name="zipcode" placeholder="ZipCode">
+                  <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="ZipCode">
                 </div> <!-- formline#2 -->
               </div>
 

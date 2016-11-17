@@ -98,7 +98,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <div class="modal-header">
            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
            <h3 class="modal-title">Update The Player's Information</h3>
-           <h3><?php echo "Jersey Number: " . $currentplayer["jerseynumber"]; ?> </h3>
+           <h3><?php echo "Jersey Number: " . $currentplayer["jerseynumber"]  ?> </h3>
          </div>
          <div class="modal-body">
            <form class="" method="post" action="update.php">
@@ -115,23 +115,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                  <label for="state">State</label>
                  <input type="text" class="form-control"  id="state" name="state" value= " <?php echo $currentplayer["state"]; ?>">
                  <label for="zipcode">Zip</label>
-                 <input type="number" class="form-control " id="zipcode" name="zipcode" value= " <?php echo $currentplayer["zipcode"]; ?>">
+                 <input type="text" class="form-control " id="zipcode" name="zipcode" value= " <?php echo $currentplayer["zipcode"]; ?>">
                </div> <!-- form inline#2 -->
              </div><!-- form-group -->
 
              <div class="form-inline" id="formline3">
                <label for="jerseynumber" class="hidden">Number</label>
                <input type="text" class="hidden" id="jerseynumber" name="jerseynumber" value= " <?php echo $currentplayer["jerseynumber"]; ?>">
-               <div class="form-group">
+               <!-- <div class="form-group">
                  <label for="UniformSize">Uniform Size</label>
-                 <select class="form-control" id="UniformSize" value= " <?php echo $currentplayer["UniformSize"]; ?>">
-                   <option>Small</option>
-                   <option>Medium</option>
-                   <option>Large</option>
-                   <option>X-Large</option>
+                 <select class="form-control" id="UniformSize">
+                   <option value="Small" id="Small">Small</option>
+                   <option value="Medium" id="Medium" selected >Medium</option>
+                   <option value="Large" id="Large">Large</option>
+                   <option value="X-Large" id="X-Large">X-Large</option>
                  </select>
-
-               </div> <!-- uniform size -->
+               </div>  -->
+               <!--uniform size -->
              </div>  <!-- form inline#3 -->
  <!--            <button type="submit" class="btn btn-primary">Add player</button> -->
              <input type="submit" class="btn btn-primary" value ="Update Player"/>
@@ -144,6 +144,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        </footer> -->
        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
        <script src="js/bootstrap.min.js"</script>
+       <script src="js/jquery-1.min.js"</script>
        <script src="js/app.js"></script>
-     </body>
+
+      </body>
    </html>

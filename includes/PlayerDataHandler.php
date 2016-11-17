@@ -80,8 +80,8 @@ class PlayerDataHandler
 				INSERT INTO `roster` (`jerseynumber`,`firstName`,`lastName`,`address`,`city`,`state`,`zipcode`,`UniformSize`)
 				VALUES (" . $jersey . $cq  . $firstName . $qcq . $lastName
 				. $qcq . $address . $qcq . $city . $qcq . $state . $qcq . $zipcode . $qcq . $UniformSize .      $q.")";
-				echo $sql;
 				$stmt = $this->db->prepare($sql);
+
 				return $stmt->execute();
 
 		}
@@ -98,10 +98,11 @@ class PlayerDataHandler
 			$results = $stmt->fetchAll();
 	//		echo "Results: \n";
 	//		echo "First Name: " . $results[0]["firstName"];
-	//		echo "Zip Code: " . $results[0]["zipcode"];
+	//		echo "Uniform Size: " . $results[0]["UniformSize"];
+
 			if (IS_ARRAY($results) ) return $results[0];
 		}
-		
+
 		public function update_player($updPlayer) {
 			// Update the information for a given player based on their jersey number.
 
@@ -114,7 +115,10 @@ class PlayerDataHandler
 				$city = $updPlayer->city;
 				$state = $updPlayer->state;
 				$zipcode = $updPlayer->zipcode;
-				$UniformSize = $updPlayer->UniformSize;
+			//$UniformSize = $updPlayer->UniformSize;
+
+		//		echo 'Uniform Size on update: ' . $UniformSize;
+		//var_dump($UniformSize);
 				// variables to handle the SQL syntax.
 				$cq = ', "';
 				$qcq = '","';
@@ -127,10 +131,10 @@ class PlayerDataHandler
 				. ", `city` = " . $q . $city . $q
 				. ", `state` = " . $q . $state . $q
 				. ", `zipcode` = " . $q . $zipcode . $q
-				. ", `UniformSize` = " . $q . $UniformSize . $q
+			//	. ", `UniformSize` = " . $q . $UniformSize . $q
 				. "  WHERE `jerseynumber` = $jersey" ;
-				echo "UPDATE sql statement: " . "\n";
-				echo $sql . "\n";
+		//		echo "UPDATE sql statement: " . "\n";
+		//		echo $sql . "\n";
 				$stmt = $this->db->prepare($sql);
 				return $stmt->execute();
 		}

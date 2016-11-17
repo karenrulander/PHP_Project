@@ -30,7 +30,7 @@
         <li><a href="roster.php">Roster</a></li>
       </ul>
     </header>
-    <div class = "profile hidden-sm">
+    <div class = "profile hidden-xs">
       <img class="profile-pic img-responsive img-rounded" src="img/TheoIsaac_Oct2015.jpg" alt="Isaac &amp;Theo">
     </div>
       <div class="main-div row">
